@@ -18,7 +18,7 @@ export default function App() {
     <>
       <button onClick= {handleClick}>Hide Element Below</button>
 
-      {toggleActive ? <div>Toggle Challenge</div> : null}
+      {toggleActive ? (<div>Toggle Challenge</div>) : null}
 
     </>
   );
