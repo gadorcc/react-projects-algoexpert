@@ -20,18 +20,18 @@ function Category({category, questions, submissionByQuestion}) {
   const totalQuestions = questions.length;
 }
 
-function useQuestionsandSubmissions() {
+function useQuestionsAndSubmissions() {
   const [questions, setQuestions] = useState([]);
   const [submissions, setSubmissions] = useState([]);
 
-  useEffect(() =>
+  useEffect(() => {
     const fetchData = async() => {
       const [questionsResponse, submissionsResponse] = await Promise.all([
         fetch(QUESTIONS_API_BASE_URL),
         fetch(SUBMISSIONS_API_BASE_URL),
       ]);
-      const [questions, submissions] await Promise.all([
-        questions.Response.json(),
+      const [questions, submissions] = await Promise.all([
+        questionsResponse.json(),
         submissionsResponse.json(),
       ]);
 
@@ -53,7 +53,7 @@ function getSubmissionByQuestion(submissions) => {
   return getSubmissionsByQuestion;
 }
 
-function getQuestionsByCategory(questions) => {
+function getQuestionsByCategory((questions) => {
   const questionsbyCategory = {};
   questions.forEach(({category, ...question}) =>{
     if(!questionsByCategory.hasOwnProperty(category)) {

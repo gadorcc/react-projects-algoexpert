@@ -5,6 +5,7 @@ const QUIZ_API_BASE_URL = 'http://universities.hipolabs.com/search?country=Unite
 
 export default function Quiz() {
   const [questions, setQuestions] = useState([]);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     getQuestions();
@@ -15,38 +16,51 @@ export default function Quiz() {
     const jsonData = await response.json();
     setQuestions(jsonData);
   };
-
-  // Check if the questions array has data before accessing the 'country' property
-  // const countryName = questions.length > 0 ? questions[0].country : null;
+  function handleClick() {
+    setPage(page + 1);
+  }
+  let questionsList = questions[page];
 
   return (
     <>
-      {
-        questions.map(({name, domains}, i) => (
-          <div key={i} className="card">
-          <div className="card-body">
-            <h1>{name}</h1>
-            {domains.map((domain, j) => <p key={j}>{domain}</p>)}
-          </div>
+      <h1>Hola</h1>
+      {questionsList && (
+        <div>
+          <p>
+            <strong>Name:</strong> {questionsList.name}
+          </p>
+          <p>
+            <strong>Domains:</strong> {questionsList.domains.join(', ')}
+          </p>
         </div>
-      ))
-      }
-
+      )}
+      <button onClick={handleClick}>Next</button>
     </>
   );
 }
 
 
-// <h1>{questions.length}</h1>
-// {questions.length > 0 ? (
-//   <ul>
-//     {questions.map((question, index) => (
-//       <li key={index}>{question.country}</li>
-//       question.domains.map((answer, index) =>(
-//         <h2>{question.domains.answer}</h2>
-//       ))
-//     ))}
-//   </ul>
-// ) : (
-//   <p>Loading...</p>
-// )}
+// return (
+//   <>
+//     {questions.length > 0 ? (
+//       <div>
+//         {
+//           questions.map(({question, answers}, i) => (
+//             <div key={i} className="card">
+//             <div className="card-body">
+//               <h1>{question}</h1>
+//               {answers.map((answer, j) => <h2 key={j}>{answer}</h2>)}
+
+//               <button>Back</button>
+//               <button disabled="true">Next</button>
+//             </div>
+//           </div>
+//           ))
+//         }
+
+//       </div>
+//     ) : (
+//       <p>Loading...</p>
+//      )}
+//   </>
+// );

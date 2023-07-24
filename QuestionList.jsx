@@ -13,7 +13,7 @@ export default function QuestionList() {
   const getQuestionsWithFetch = async () => {
     const response = await fetch(QUESTIONS_API_BASE_URL);
     const jsonData = await response.json();
-    setData(jsondata)
+    setData(jsonData)
   };
   return (
     <>
