@@ -21,21 +21,33 @@ export default function Quiz() {
   }
   let questionsList = questions[page];
 
+  function answerCheck() {
+    if(questionsList.correctAnswer) {
+      return ("answer correct");
+    }else{
+      return ("answer incorrect");
+    }
+  }
   return (
     <>
-      <h1>Hola</h1>
-      {questionsList && (
-        <div>
-          <p>
-            <strong>Name:</strong> {questionsList.name}
-          </p>
-          <p>
-            <strong>Domains:</strong> {questionsList.domains.join(', ')}
-          </p>
-        </div>
-      )}
-      <button onClick={handleClick}>Next</button>
-    </>
+    {questionList && (
+      <div>
+        <h1>{questionList.question}</h1>
+        {questionList.answers.map((answer, j) =>
+          <h2
+            key={j}
+            onClick={() => console.log(answerCheck(j))}
+            className={answerCheck(j)}
+            style={{ pointerEvents: 'none' }} // Disable pointer events
+          >
+            {answer}
+          </h2>
+        )};
+      </div>
+    )}
+    <button onClick={handleClickBack}>Back</button>
+    <button onClick={handleClickNext}>Next</button>
+  </>
   );
 }
 
@@ -64,3 +76,31 @@ export default function Quiz() {
 //      )}
 //   </>
 // );
+
+
+// function answerCheck(selectedAnswerIndex) {
+//   const correctAnswerIndex = questions[page].correctAnswer;
+//   if (selectedAnswerIndex === correctAnswerIndex) {
+//     return "answer correct";
+//   } else {
+//     return "answer incorrect";
+//   }
+// }
+
+// <{questionList && (
+//   <div>
+//     <h1>{questionList.question}</h1>
+//     {questionList.answers.map((answer, j) =>
+//      <h2
+//         key={j}
+//         onClick={() => console.log(answerCheck(j))}
+//         className={answerCheck(j)}
+//         style={{ pointerEvents: 'none' }} // Disable pointer events
+//       >
+//         {answer}
+//       </h2>
+//     )};
+//   </div>
+// )}
+// <button onClick={handleClickBack}>Back</button>
+// <button onC
